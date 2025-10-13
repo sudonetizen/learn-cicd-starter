@@ -17,11 +17,6 @@ import (
 	_ "github.com/tursodatabase/libsql-client-go/libsql"
 )
 
-func unused() {
-
-
-}
-
 type apiConfig struct{ DB *database.Queries }
 
 //go:embed static/*
