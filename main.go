@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+    "time"
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/cors"
@@ -17,9 +18,7 @@ import (
 	_ "github.com/tursodatabase/libsql-client-go/libsql"
 )
 
-type apiConfig struct {
-	DB *database.Queries
-}
+type apiConfig struct{ DB *database.Queries }
 
 //go:embed static/*
 var staticFiles embed.FS
@@ -91,6 +90,7 @@ func main() {
 	srv := &http.Server{
 		Addr:    ":" + port,
 		Handler: router,
+        ReadHeaderTimeout: 10 * time.Second,
 	}
 
 	log.Printf("Serving on port: %s\n", port)
